@@ -1,5 +1,18 @@
-<button class="btn btn-primary" [disabled]="!allowNewServer">Add Server</button>
-<p [innerText]="allowNewServer"></p>
-<!--<p>{{ allowNewServer }}</p>-->
-<app-server></app-server>
-<app-server></app-server>
+<label>Server Name</label>
+<!--<input type="text" class="form-control" (input)="onUpdateServerName($event)">-->
+<input type="text" class="form-control" [(ngModel)]="ServerName">
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+<!--<p [innerText]="allowNewServer"></p>-->
+<p>{{ allowNewServer }}</p>
+<!--<p>{{ ServerCreationStatus }}</p>-->
+<p *ngIf="serverCreated" >Server was created, servername is {{ ServerName }}</p>
+<!--else-condition with ngIf
+    ##Alternative 1
+    <p *ngIf="!serverCreated" >No Server was created</p>
+    ##Alternative 2
+    <p *ngIf="serverCreated; else noServer" >Server was created, servername is {{ ServerName }}</p>
+<ng-template #noServer>
+    <p>No Server was created!</p>
+</ng-template>-->
+<app-server *ngFor="let server of servers"></app-server>
+<!--<app-server></app-server>-->
